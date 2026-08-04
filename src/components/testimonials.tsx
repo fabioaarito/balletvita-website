@@ -60,14 +60,14 @@ function TestimonialCard({ card }: { card: (typeof testimonialsConfig.cards)[num
   const mirrored = card.mirrored
   return (
     <div className={`relative h-[213px] lg:h-[240px] rounded-[18px] border-[4px] ${s.card}`}>
-      <div className={`absolute -top-[40px] flex items-center gap-[15px] ${mirrored ? "flex-row-reverse right-[44px]" : "left-[44px]"}`}>
-        <div className="w-[109px] h-[109px] lg:w-[120px] lg:h-[120px] rounded-full overflow-hidden shrink-0 shadow-md">
+      <div className={`absolute -top-[40px] ${mirrored ? "right-[44px]" : "left-[44px]"}`}>
+        <div className="w-[109px] h-[109px] lg:w-[120px] lg:h-[120px] rounded-full overflow-hidden shadow-md">
           <img src={card.avatar} alt="" className="w-full h-full object-cover" />
         </div>
-        <div className={mirrored ? "text-right" : "text-left"}>
-          <p className={`font-changa ${s.name} text-[16px] lg:text-[19px] font-bold`}>{card.name}</p>
-          <p className={`font-changa ${s.role} text-[16px] lg:text-[18px] mt-[2px]`}>{card.role}</p>
-        </div>
+      </div>
+      <div className={`absolute top-[6px] lg:top-[10px] ${mirrored ? "right-[168px] lg:right-[179px] text-right" : "left-[168px] lg:left-[179px] text-left"}`}>
+        <p className={`font-changa ${s.name} text-[16px] lg:text-[19px] font-bold leading-[22px]`}>{card.name}</p>
+        <p className={`font-changa ${s.role} text-[16px] lg:text-[18px] mt-[2px] leading-[22px]`}>{card.role}</p>
       </div>
       <p className={`absolute inset-x-[22px] top-[82px] lg:top-[104px] font-amiko ${s.quote} text-[16px] leading-[22px]`}>
         {card.quote}
