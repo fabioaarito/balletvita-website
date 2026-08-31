@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { aboutConfig } from "@/data/site-config"
 
 export function AboutSection() {
@@ -20,11 +21,14 @@ export function AboutSection() {
             {aboutConfig.anniversary}
           </p>
           <div className="flex justify-center mt-[38px] lg:mt-10">
-            <button className="w-[234px] lg:w-[280px] h-[45px] lg:h-[50px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm">
+            <Link
+              href="/sobre-nos"
+              className="w-[234px] lg:w-[280px] h-[45px] lg:h-[50px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm"
+            >
               <span className="font-changa text-[#363535] text-[17px] lg:text-[19px] font-bold">
                 {aboutConfig.cta}
               </span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

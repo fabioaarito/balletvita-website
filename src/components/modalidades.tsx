@@ -1,15 +1,12 @@
 'use client'
 
 import { useState } from "react"
-import { modalidadesConfig } from "@/data/site-config"
+import Link from "next/link"
+import { modalidadesConfig, modalidadesData } from "@/data/site-config"
 
-const scheduleItems = [
-  "Ballet Clássico",
-  "Dança Contemporânea",
-  "Dança Social e de Salão",
-  "Pilates",
-  "Yoga",
-]
+const remainingModalities = modalidadesData.filter(
+  (m) => !modalidadesConfig.items.some((i) => i.slug === m.slug)
+)
 
 export function ModalidadesSection() {
   const [open, setOpen] = useState(false)
@@ -23,9 +20,10 @@ export function ModalidadesSection() {
           </h2>
           <div className="mt-[33px] lg:mt-8 flex flex-col items-center gap-[24px] lg:grid lg:grid-cols-3 lg:items-stretch lg:gap-6">
             {modalidadesConfig.items.map((item) => (
-              <div
+              <Link
                 key={item.title}
-                className="relative w-[352px] lg:w-full h-[174px] lg:h-[240px] overflow-hidden cursor-pointer group"
+                href={`/modalidades/${item.slug}`}
+                className="relative w-[352px] lg:w-full h-[174px] lg:h-[240px] overflow-hidden group"
               >
                 <img
                   src={item.image}
@@ -35,7 +33,7 @@ export function ModalidadesSection() {
                 <span className="absolute inset-0 flex items-center justify-center font-changa text-white text-[17px] lg:text-[22px] font-bold tracking-[1.87px] text-center px-4">
                   {item.title}
                 </span>
-              </div>
+              </Link>
             ))}
           </div>
           <div className="mt-[24px] pb-[36px] lg:pb-12 flex justify-center">
@@ -53,13 +51,14 @@ export function ModalidadesSection() {
               </button>
               {open && (
                 <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-white/10 overflow-hidden z-20">
-                  {scheduleItems.map((s) => (
-                    <div
-                      key={s}
-                      className="px-6 py-3 font-amiko text-sm text-[#363535] hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-0"
+                  {remainingModalities.map((m) => (
+                    <Link
+                      key={m.slug}
+                      href={`/modalidades/${m.slug}`}
+                      className="block px-6 py-3 font-amiko text-sm text-[#363535] hover:bg-gray-50 border-b border-gray-100 last:border-0"
                     >
-                      {s}
-                    </div>
+                      {m.title}
+                    </Link>
                   ))}
                 </div>
               )}
@@ -73,11 +72,14 @@ export function ModalidadesSection() {
             <p className="font-amiko text-[#363535] text-[20px] lg:text-[26px] font-bold text-center leading-[27px] whitespace-pre-line">
               {modalidadesConfig.schedule}
             </p>
-            <button className="mt-[23px] w-[240px] lg:w-[300px] h-[50px] lg:h-[58px] rounded-full bg-[#67c4a8] flex items-center justify-center hover:bg-[#56b096] transition-colors shadow-sm">
+            <Link
+              href="/horarios"
+              className="mt-[23px] w-[240px] lg:w-[300px] h-[50px] lg:h-[58px] rounded-full bg-[#67c4a8] flex items-center justify-center hover:bg-[#56b096] transition-colors shadow-sm"
+            >
               <span className="font-changa text-white text-[20px] lg:text-[24px] font-bold">
                 {modalidadesConfig.scheduleCta}
               </span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

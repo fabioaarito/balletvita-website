@@ -1,13 +1,14 @@
 'use client'
 
 import { useState } from "react"
-import { teachersConfig } from "@/data/site-config"
+import Link from "next/link"
+import { teachersConfig, professoresData } from "@/data/site-config"
 
 const teachers = [
-  { id: 1, img: teachersConfig.leftImage, left: true },
-  { id: 2, img: teachersConfig.rightImage, left: false },
-  { id: 3, img: teachersConfig.leftImage, left: true },
-  { id: 4, img: teachersConfig.rightImage, left: false },
+  { id: 1, img: teachersConfig.leftImage, slug: "ana-corista", left: true },
+  { id: 2, img: teachersConfig.rightImage, slug: "noah-almeida", left: false },
+  { id: 3, img: teachersConfig.leftImage, slug: "ana-corista", left: true },
+  { id: 4, img: teachersConfig.rightImage, slug: "noah-almeida", left: false },
 ]
 
 export function TeachersSection() {
@@ -23,12 +24,12 @@ export function TeachersSection() {
           <div className="mt-[38px] lg:mt-10 flex lg:grid lg:grid-cols-4 lg:gap-4">
             <div className="w-1/2 lg:w-auto flex flex-col">
               {teachers.filter((t) => t.left).map((t) => (
-                <TeacherPhoto key={t.id} img={t.img} />
+                <TeacherPhoto key={t.id} img={t.img} slug={t.slug} />
               ))}
             </div>
             <div className="w-1/2 lg:w-auto flex flex-col">
               {teachers.filter((t) => !t.left).map((t) => (
-                <TeacherPhoto key={t.id} img={t.img} />
+                <TeacherPhoto key={t.id} img={t.img} slug={t.slug} />
               ))}
             </div>
           </div>
@@ -47,13 +48,14 @@ export function TeachersSection() {
               </button>
               {open && (
                 <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden z-20">
-                  {["Ballet Clássico", "Dança Contemporânea", "Dança Social e de Salão", "Pilates", "Yoga"].map((s) => (
-                    <div
-                      key={s}
-                      className="px-6 py-3 font-amiko text-sm text-[#363535] hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-0"
+                  {professoresData.map((p) => (
+                    <Link
+                      key={p.slug}
+                      href={`/professores/${p.slug}`}
+                      className="block px-6 py-3 font-amiko text-sm text-[#363535] hover:bg-gray-50 border-b border-gray-100 last:border-0"
                     >
-                      {s}
-                    </div>
+                      {p.name}
+                    </Link>
                   ))}
                 </div>
               )}
@@ -79,18 +81,28 @@ export function TeachersSection() {
   )
 }
 
-function TeacherPhoto({ img }: { img: string }) {
+function TeacherPhoto({ img, slug }: { img: string; slug: string }) {
+  const teacher = professoresData.find((p) => p.slug === slug)
   return (
     <div className="relative w-full h-[174px] overflow-hidden">
-      <img src={img} alt="" className="w-full h-full object-cover" />
-      <button
+      <img src={img} alt={teacher?.name} className="w-full h-full object-cover" />
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-8 pb-2 px-3">
+        <p className="font-changa text-white text-[15px] lg:text-[17px] font-bold leading-[18px]">
+          {teacher?.name}
+        </p>
+        <p className="font-changa text-white text-[11px] lg:text-[12px] font-semibold leading-[14px] opacity-90">
+          {teacher?.homeLabel}
+        </p>
+      </div>
+      <Link
+        href={`/professores/${slug}`}
         aria-label="Saber mais sobre o professor"
         className="absolute top-[6px] right-[6px] w-6 h-6 rounded-full bg-white text-[#67c4a8] shadow flex items-center justify-center hover:bg-[#67c4a8] hover:text-white transition-colors"
       >
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M7 3v8M3 7h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
-      </button>
+      </Link>
     </div>
   )
 }

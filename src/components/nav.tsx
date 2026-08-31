@@ -32,7 +32,7 @@ export function MenuOverlay() {
           open ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex items-center justify-between px-2 pt-[12px]">
+        <div className="flex items-center justify-between px-[34px] pt-[12px]">
           <img src="/images/logo.png" alt="Balletvita" className="w-[147px] h-auto" />
           <button
             onClick={() => setOpen(false)}

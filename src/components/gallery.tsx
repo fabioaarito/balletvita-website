@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import Link from "next/link"
 import { galleryConfig } from "@/data/site-config"
 
 export function GallerySection() {
@@ -53,11 +54,14 @@ export function GallerySection() {
           </div>
         </div>
         <div className="flex justify-center mt-[40px] lg:mt-12 pb-[49px] lg:pb-16">
-          <button className="w-[240px] lg:w-[300px] h-[50px] lg:h-[58px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm">
+          <Link
+            href="/espetaculos"
+            className="w-[240px] lg:w-[300px] h-[50px] lg:h-[58px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm"
+          >
             <span className="font-changa text-[#363535] text-[18px] lg:text-[22px] font-bold">
               {galleryConfig.cta}
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

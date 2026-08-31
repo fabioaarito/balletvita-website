@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import Link from "next/link"
 import { associationConfig, galleryConfig } from "@/data/site-config"
 
 export function AssociationSection() {
@@ -67,11 +68,14 @@ export function AssociationSection() {
           <p className="font-amiko text-white text-[16px] lg:text-[18px] leading-[22px] lg:leading-[26px] text-center max-w-[340px] lg:max-w-xl mt-[53px] lg:mt-10">
             {associationConfig.text2}
           </p>
-          <button className="w-[180px] lg:w-[220px] h-[45px] lg:h-[54px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors mt-[24px] lg:mt-8 shadow-sm">
+          <Link
+            href="/associacao"
+            className="w-[180px] lg:w-[220px] h-[45px] lg:h-[54px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors mt-[24px] lg:mt-8 shadow-sm"
+          >
             <span className="font-changa text-[#363535] text-[18px] lg:text-[22px] font-bold">
               {associationConfig.cta}
             </span>
-          </button>
+          </Link>
         </div>
       </div>
       </div>

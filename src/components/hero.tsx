@@ -11,8 +11,13 @@ export function Hero() {
           className="relative h-[707px] lg:h-[900px] w-full bg-cover bg-center"
           style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
         >
-          <div className="absolute top-0 inset-x-0 flex items-center justify-between px-[8px] lg:px-10 pt-[12px]">
-            <img src="/images/logo.png" alt="Balletvita" className="w-[147px] lg:w-[220px] h-auto" />
+          <div className="absolute top-0 inset-x-0 flex items-center justify-between px-[34px] lg:px-10 pt-[12px]">
+            <div className="flex flex-col items-start">
+              <img src="/images/logo.png" alt="Balletvita" className="w-[147px] lg:w-[220px] h-auto" />
+              <span className="font-changa text-white text-[13px] lg:text-[17px] font-semibold mt-[2px] tracking-[1px]">
+                {heroConfig.slogan}
+              </span>
+            </div>
             <div className="lg:hidden">
               <MenuOverlay />
             </div>
@@ -26,15 +31,17 @@ export function Hero() {
             </p>
           </div>
         </div>
-        <div className="flex flex-col items-center px-[34px] lg:px-8 pt-[52px] lg:pt-16 pb-0">
-          <button className="w-[266px] lg:w-[340px] h-[45px] lg:h-[54px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm">
-            <span className="font-changa text-[#363535] text-[17px] lg:text-[21px] font-bold">
-              {heroConfig.cta}
-            </span>
-          </button>
-          <p className="font-amiko text-[#363535] text-[18px] lg:text-[23px] font-bold text-center leading-[24px] mt-[25px] max-w-[320px]">
-            {heroConfig.description}
-          </p>
+        <div className="bg-[#67c4a8]">
+          <div className="flex flex-col items-center px-[34px] lg:px-8 pt-[52px] lg:pt-16 pb-[52px] lg:pb-16">
+            <button className="w-[266px] lg:w-[340px] h-[45px] lg:h-[54px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm">
+              <span className="font-changa text-[#363535] text-[17px] lg:text-[21px] font-bold">
+                {heroConfig.cta}
+              </span>
+            </button>
+            <p className="font-amiko text-white text-[18px] lg:text-[23px] font-bold text-center leading-[24px] mt-[25px] max-w-[320px]">
+              {heroConfig.description}
+            </p>
+          </div>
         </div>
       </div>
     </section>
