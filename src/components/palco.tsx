@@ -8,7 +8,7 @@ export function PalcoSection() {
           <h2 className="font-changa text-[#67c4a8] text-[26px] lg:text-[40px] font-bold text-center">
             {palcoConfig.title}
           </h2>
-          <p className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[22px] text-center max-w-[346px] lg:max-w-3xl mx-auto mt-[30px] lg:mt-8 whitespace-pre-line">
+          <p className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-left max-w-[430px] lg:max-w-3xl mt-[30px] lg:mt-8 whitespace-pre-line">
             {palcoConfig.text}
           </p>
         </div>

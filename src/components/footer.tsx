@@ -2,7 +2,7 @@ import { footerConfig } from "@/data/site-config"
 
 export function Footer() {
   return (
-    <footer className="w-full bg-[#eeeeee]">
+    <footer className="w-full bg-white">
       <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
         <div className="flex flex-col items-center text-center py-[40px] lg:py-14">
           <h2 className="font-changa text-[#373636] text-[24px] lg:text-[28px] font-semibold">

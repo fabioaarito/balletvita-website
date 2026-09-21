@@ -30,7 +30,7 @@ function InfoBlock({ block }: { block: (typeof infoCardsConfig.blocks)[number] }
       <h3 className="font-changa text-[#67c4a8] text-[19px] lg:text-[26px] font-semibold">
         {block.title}
       </h3>
-      <ul className="mt-[12px] flex flex-col items-center gap-2">
+      <ul className="mt-[12px] flex flex-col items-start gap-2">
         {block.items.map((item) => (
           <li key={item} className="flex items-center gap-[4px]">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="shrink-0">

@@ -20,6 +20,14 @@ export async function generateMetadata({
   }
 }
 
+function chunk<T>(arr: readonly T[], size: number): T[][] {
+  const out: T[][] = []
+  for (let i = 0; i < arr.length; i += size) {
+    out.push(arr.slice(i, i + size))
+  }
+  return out
+}
+
 export default async function ProfessorPage({
   params,
 }: {
@@ -30,71 +38,81 @@ export default async function ProfessorPage({
   if (!professor) notFound()
 
   const outros = professoresData.filter((p) => p.slug !== slug)
+  const bioGroups = chunk(professor.bio, 2)
 
   return (
     <SubpageShell
       title={professor.name}
-      variant="yellow"
+      variant="custom"
       beforeTitle={
-        <div className="bg-white">
-          <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-            <div className="pt-[38px] lg:pt-12">
-              <div className="flex justify-center">
-                <div className="w-[240px] lg:w-[300px] h-[240px] lg:h-[300px] rounded-full overflow-hidden">
-                  <img src={professor.image} alt={professor.name} className="w-full h-full object-cover" />
-                </div>
-              </div>
-            </div>
+        <div className="relative flex h-[280px] lg:h-[420px] w-full">
+          <div className="w-[70%] h-full overflow-hidden">
+            <img src={professor.image} alt={professor.name} className="w-full h-full object-cover" />
+          </div>
+          <div className="w-[30%] h-full bg-[#67c4a8]" />
+          <div className="absolute bottom-0 left-[44%] right-0 min-h-[60px] lg:min-h-[84px] bg-[#f6e449] flex items-center justify-center px-[12px] py-[14px]">
+            <span className="font-changa text-[#363535] text-[17px] lg:text-[26px] font-bold tracking-[1px] text-center leading-[22px] lg:leading-[32px]">
+              {professor.name.toUpperCase()}
+            </span>
           </div>
         </div>
       }
     >
+      {bioGroups.map((group, gi) => {
+        const isTeal = gi % 2 === 1
+        return (
+          <div key={gi} className={isTeal ? "bg-[#67c4a8]" : "bg-white"}>
+            <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
+              <div className={`max-w-3xl ${gi === 0 ? "pt-[34px] lg:pt-12 pb-[30px] lg:pb-10" : "py-[30px] lg:py-10"}`}>
+                {gi === 0 && (
+                  <p className="font-changa text-[#363535] text-[18px] lg:text-[24px] font-bold">
+                    {professor.role}
+                  </p>
+                )}
+                <div className={`${gi === 0 ? "mt-[24px] lg:mt-8" : ""} flex flex-col gap-[22px] lg:gap-7`}>
+                  {group.map((paragraph) => (
+                    <p
+                      key={paragraph}
+                      className={`font-amiko text-[17px] lg:text-[20px] leading-[26px] lg:leading-[30px] ${
+                        isTeal ? "text-white" : "text-[#363535]"
+                      }`}
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })}
+
       <section className="bg-white">
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-          <div className="pt-[34px] lg:pt-12">
-            <p className="font-changa text-[#363535] text-[20px] lg:text-[26px] font-semibold text-center">
-              {professor.role}
-            </p>
-          </div>
-        </div>
-      </section>
-      <section className="bg-white">
-        <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-          <div className="pt-[30px] lg:pt-10 pb-[44px] lg:pb-16 flex flex-col gap-[22px] lg:gap-7">
-            {professor.bio.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-center max-w-[430px] lg:max-w-3xl mx-auto"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
-      <div className="bg-[#67c4a8]">
-        <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-          <div className="pt-[44px] lg:pt-14 pb-[48px] lg:pb-16">
-            <p className="font-changa text-white text-[22px] lg:text-[28px] font-bold text-center">
+          <div className="py-[44px] lg:py-16 flex flex-col items-center">
+            <p className="font-changa text-[#363535] text-[22px] lg:text-[28px] font-bold text-center">
               Modalidades
             </p>
-            <div className="mt-[30px] lg:mt-10 flex flex-wrap justify-center gap-[12px] lg:gap-5">
+            <div className="mt-[34px] lg:mt-12 flex flex-wrap justify-center gap-[24px] lg:gap-10">
               {professor.modalidades.map((m) => (
                 <Link
                   key={m.slug}
                   href={`/modalidades/${m.slug}`}
-                  className="px-7 py-3 rounded-full border-[1px] border-white text-white font-changa text-[15px] lg:text-[17px] font-semibold hover:bg-white hover:text-[#67c4a8] transition-colors"
+                  className="w-[116px] h-[116px] lg:w-[150px] lg:h-[150px] rounded-full bg-[#f6e449] flex items-center justify-center text-center px-[14px] hover:bg-[#f2de3b] transition-colors shadow-sm"
                 >
-                  {m.title}
+                  <span className="font-changa text-[#363535] text-[16px] lg:text-[20px] font-bold leading-[20px] lg:leading-[24px]">
+                    {m.title}
+                  </span>
                 </Link>
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
       <section className="bg-white">
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-          <div className="py-[46px] lg:py-14 flex flex-col items-center">
+          <div className="pb-[46px] lg:pb-16 flex flex-wrap justify-center gap-[12px] lg:gap-4">
             {outros.map((p) => (
               <Link
                 key={p.slug}
@@ -104,9 +122,11 @@ export default async function ProfessorPage({
                 Conhecer {p.name}
               </Link>
             ))}
+          </div>
+          <div className="pb-[52px] lg:pb-16 flex justify-center">
             <Link
               href="/"
-              className="mt-[40px] lg:mt-12 w-[234px] lg:w-[280px] h-[45px] lg:h-[50px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm"
+              className="w-[234px] lg:w-[280px] h-[45px] lg:h-[50px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm"
             >
               <span className="font-changa text-[#363535] text-[17px] lg:text-[19px] font-bold">
                 Voltar ao início

@@ -26,7 +26,7 @@ export function AssociationSection() {
           <h2 className="font-changa text-white text-[24px] lg:text-[32px] font-semibold">
             {associationConfig.title}
           </h2>
-          <p className="font-amiko text-white text-[16px] lg:text-[18px] leading-[22px] lg:leading-[26px] text-center max-w-[340px] lg:max-w-xl mt-[38px] lg:mt-8">
+          <p className="font-amiko text-white text-[16px] lg:text-[18px] leading-[24px] lg:leading-[28px] text-left w-full max-w-[430px] lg:max-w-3xl mt-[38px] lg:mt-8">
             {associationConfig.text}
           </p>
           <div className="relative w-full h-[267px] lg:h-[420px] mt-[38px] lg:mt-10 overflow-hidden">
@@ -65,7 +65,7 @@ export function AssociationSection() {
               ))}
             </div>
           </div>
-          <p className="font-amiko text-white text-[16px] lg:text-[18px] leading-[22px] lg:leading-[26px] text-center max-w-[340px] lg:max-w-xl mt-[53px] lg:mt-10">
+          <p className="font-amiko text-white text-[16px] lg:text-[18px] leading-[24px] lg:leading-[28px] text-left w-full max-w-[430px] lg:max-w-3xl mt-[53px] lg:mt-10">
             {associationConfig.text2}
           </p>
           <Link

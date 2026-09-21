@@ -23,7 +23,7 @@ export function ModalidadesSection() {
               <Link
                 key={item.title}
                 href={`/modalidades/${item.slug}`}
-                className="relative w-[352px] lg:w-full h-[174px] lg:h-[240px] overflow-hidden group"
+                className="relative w-[352px] lg:w-full h-[174px] lg:h-[240px] rounded-[14px] overflow-hidden group"
               >
                 <img
                   src={item.image}

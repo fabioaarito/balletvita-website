@@ -4,12 +4,11 @@ import { useState } from "react"
 import Link from "next/link"
 import { teachersConfig, professoresData } from "@/data/site-config"
 
-const teachers = [
-  { id: 1, img: teachersConfig.leftImage, slug: "ana-corista", left: true },
-  { id: 2, img: teachersConfig.rightImage, slug: "noah-almeida", left: false },
-  { id: 3, img: teachersConfig.leftImage, slug: "ana-corista", left: true },
-  { id: 4, img: teachersConfig.rightImage, slug: "noah-almeida", left: false },
-]
+const featuredSlugs = ["ana-corista", "teresa-alves-da-silva", "miguel-quintas", "noah-almeida"]
+
+const featured = featuredSlugs
+  .map((slug) => professoresData.find((p) => p.slug === slug))
+  .filter((p): p is (typeof professoresData)[number] => Boolean(p))
 
 export function TeachersSection() {
   const [open, setOpen] = useState(false)
@@ -23,13 +22,13 @@ export function TeachersSection() {
           </h2>
           <div className="mt-[38px] lg:mt-10 flex lg:grid lg:grid-cols-4 lg:gap-4">
             <div className="w-1/2 lg:w-auto flex flex-col">
-              {teachers.filter((t) => t.left).map((t) => (
-                <TeacherPhoto key={t.id} img={t.img} slug={t.slug} />
+              {featured.filter((_, i) => i % 2 === 0).map((t) => (
+                <TeacherPhoto key={t.slug} professor={t} />
               ))}
             </div>
             <div className="w-1/2 lg:w-auto flex flex-col">
-              {teachers.filter((t) => !t.left).map((t) => (
-                <TeacherPhoto key={t.id} img={t.img} slug={t.slug} />
+              {featured.filter((_, i) => i % 2 === 1).map((t) => (
+                <TeacherPhoto key={t.slug} professor={t} />
               ))}
             </div>
           </div>
@@ -81,21 +80,20 @@ export function TeachersSection() {
   )
 }
 
-function TeacherPhoto({ img, slug }: { img: string; slug: string }) {
-  const teacher = professoresData.find((p) => p.slug === slug)
+function TeacherPhoto({ professor }: { professor: (typeof professoresData)[number] }) {
   return (
     <div className="relative w-full h-[174px] overflow-hidden">
-      <img src={img} alt={teacher?.name} className="w-full h-full object-cover" />
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-8 pb-2 px-3">
+      <img src={professor.image} alt={professor.name} className="w-full h-full object-cover" />
+      <div className="absolute inset-x-0 bottom-0 bg-[#67c4a8] px-3 py-[6px]">
         <p className="font-changa text-white text-[15px] lg:text-[17px] font-bold leading-[18px]">
-          {teacher?.name}
+          {professor.name}
         </p>
         <p className="font-changa text-white text-[11px] lg:text-[12px] font-semibold leading-[14px] opacity-90">
-          {teacher?.homeLabel}
+          {professor.homeLabel}
         </p>
       </div>
       <Link
-        href={`/professores/${slug}`}
+        href={`/professores/${professor.slug}`}
         aria-label="Saber mais sobre o professor"
         className="absolute top-[6px] right-[6px] w-6 h-6 rounded-full bg-white text-[#67c4a8] shadow flex items-center justify-center hover:bg-[#67c4a8] hover:text-white transition-colors"
       >

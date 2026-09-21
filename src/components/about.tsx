@@ -9,15 +9,15 @@ export function AboutSection() {
           <h2 className="font-changa text-[#67c4a8] text-[32px] lg:text-[40px] font-bold text-center leading-[40px] lg:leading-[48px] tracking-wide">
             {aboutConfig.title}
           </h2>
-          <p className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[22px] text-center max-w-[334px] lg:max-w-none mx-auto mt-[21px] lg:mt-8">
+          <p className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-left max-w-[430px] lg:max-w-3xl mt-[21px] lg:mt-8">
             {aboutConfig.text}
           </p>
-          <div className="flex justify-center mt-[25px] lg:mt-10">
-            <div className="w-[334px] lg:w-[640px] h-[174px] lg:h-[300px] rounded-[6px] overflow-hidden">
+          <div className="mt-[25px] lg:mt-10">
+            <div className="w-full h-[190px] lg:h-[340px] rounded-[14px] overflow-hidden">
               <img src={aboutConfig.image} alt="" className="w-full h-full object-cover" />
             </div>
           </div>
-          <p className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[22px] text-center max-w-[334px] lg:max-w-none mx-auto mt-[25px] lg:mt-8">
+          <p className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-left max-w-[430px] lg:max-w-3xl mt-[25px] lg:mt-8">
             {aboutConfig.anniversary}
           </p>
           <div className="flex justify-center mt-[38px] lg:mt-10">
