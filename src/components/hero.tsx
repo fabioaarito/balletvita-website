@@ -7,10 +7,16 @@ export function Hero() {
   return (
     <section id="cta" className="w-full bg-white">
       <div className="relative">
-        <div
-          className="relative h-[707px] lg:h-[900px] w-full bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
-        >
+        <div className="relative h-[707px] lg:h-[900px] w-full overflow-hidden">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/videos/intro-homepage.mp4"
+            poster="/images/hero-bg.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
           <div className="absolute top-0 inset-x-0 flex items-center justify-between px-[34px] lg:px-10 pt-[12px]">
             <div className="flex flex-col items-start">
               <img src="/images/logo.png" alt="Balletvita" className="w-[147px] lg:w-[220px] h-auto" />
