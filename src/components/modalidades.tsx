@@ -23,7 +23,7 @@ export function ModalidadesSection() {
               <Link
                 key={item.title}
                 href={`/modalidades/${item.slug}`}
-                className="relative w-[352px] lg:w-full h-[174px] lg:h-[240px] rounded-[14px] overflow-hidden group"
+                className="relative w-full h-[174px] lg:h-[240px] rounded-[14px] overflow-hidden group"
               >
                 <img
                   src={item.image}
@@ -37,7 +37,7 @@ export function ModalidadesSection() {
             ))}
           </div>
           <div className="mt-[24px] pb-[36px] lg:pb-12 flex justify-center">
-            <div className="relative w-[348px] lg:w-[420px]">
+            <div className="relative w-full lg:w-[420px]">
               <button
                 onClick={() => setOpen(!open)}
                 className="w-full flex items-center justify-between px-6 py-[4px] rounded-md border-[1px] border-[#f6e449] text-[#f6e449] hover:bg-[#f6e449]/10 transition-colors"

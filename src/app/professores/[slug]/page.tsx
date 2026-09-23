@@ -37,13 +37,13 @@ export default async function ProfessorPage({
   const professor = professoresData.find((p) => p.slug === slug)
   if (!professor) notFound()
 
-  const outros = professoresData.filter((p) => p.slug !== slug)
   const bioGroups = chunk(professor.bio, 2)
 
   return (
     <SubpageShell
       title={professor.name}
       variant="custom"
+      footer={false}
       beforeTitle={
         <div className="relative flex h-[280px] lg:h-[420px] w-full">
           <div className="w-[70%] h-full overflow-hidden">
@@ -106,32 +106,6 @@ export default async function ProfessorPage({
                 </Link>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white">
-        <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-          <div className="pb-[46px] lg:pb-16 flex flex-wrap justify-center gap-[12px] lg:gap-4">
-            {outros.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/professores/${p.slug}`}
-                className="px-6 py-3 rounded-full border-[1px] border-[#67c4a8] text-[#67c4a8] font-changa text-[15px] lg:text-[17px] font-semibold hover:bg-[#67c4a8] hover:text-white transition-colors"
-              >
-                Conhecer {p.name}
-              </Link>
-            ))}
-          </div>
-          <div className="pb-[52px] lg:pb-16 flex justify-center">
-            <Link
-              href="/"
-              className="w-[234px] lg:w-[280px] h-[45px] lg:h-[50px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm"
-            >
-              <span className="font-changa text-[#363535] text-[17px] lg:text-[19px] font-bold">
-                Voltar ao início
-              </span>
-            </Link>
           </div>
         </div>
       </section>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 import { SubpageShell } from "@/components/subpage-shell"
 import { ModalidadeProfessores } from "@/components/modalidade-professores"
@@ -30,13 +29,13 @@ export default async function ModalidadePage({
   const modalidade = modalidadesData.find((m) => m.slug === slug)
   if (!modalidade) notFound()
 
-  const outras = modalidadesData.filter((m) => m.slug !== slug)
   const gallery: readonly string[] = "gallery" in modalidade ? modalidade.gallery : []
 
   return (
     <SubpageShell
       title={modalidade.title}
       variant="yellow"
+      footer={false}
       beforeTitle={
         <div className="w-full">
           <img
@@ -85,26 +84,6 @@ export default async function ModalidadePage({
         </section>
       )}
       <ModalidadeProfessores slug={modalidade.slug} gallery={gallery} />
-      <section className="bg-white">
-        <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-          <div className="pb-[52px] lg:pb-16">
-            <p className="font-changa text-[#67c4a8] text-[18px] lg:text-[24px] font-semibold text-center">
-              Outras modalidades
-            </p>
-            <div className="flex flex-wrap justify-center gap-[10px] lg:gap-4 mt-[24px] lg:mt-8">
-              {outras.map((m) => (
-                <Link
-                  key={m.slug}
-                  href={`/modalidades/${m.slug}`}
-                  className="px-6 py-3 rounded-full border-[1px] border-[#67c4a8] text-[#67c4a8] font-changa text-[15px] lg:text-[17px] font-semibold hover:bg-[#67c4a8] hover:text-white transition-colors"
-                >
-                  {m.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
     </SubpageShell>
   )
 }

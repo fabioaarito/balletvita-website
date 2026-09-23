@@ -95,10 +95,10 @@ function TeacherPhoto({ professor }: { professor: (typeof professoresData)[numbe
       <Link
         href={`/professores/${professor.slug}`}
         aria-label="Saber mais sobre o professor"
-        className="absolute top-[6px] right-[6px] w-6 h-6 rounded-full bg-white text-[#67c4a8] shadow flex items-center justify-center hover:bg-[#67c4a8] hover:text-white transition-colors"
+        className="absolute top-[10px] right-[10px] w-7 h-7 flex items-center justify-center text-[#67c4a8] hover:text-[#4fa98d] transition-colors"
       >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M7 3v8M3 7h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 4v16M4 12h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>
       </Link>
     </div>

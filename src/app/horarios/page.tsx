@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { SubpageShell } from "@/components/subpage-shell"
 import { horariosPage } from "@/data/site-config"
 
@@ -42,6 +42,33 @@ const days = dayOrder.map((label) => {
   schedule.sort((a, b) => startMinutes(a.time) - startMinutes(b.time))
   return { label, schedule }
 })
+
+function wrap(index: number, length: number) {
+  return ((index % length) + length) % length
+}
+
+function useSwipe(onSwipeRight: () => void, onSwipeLeft: () => void) {
+  const start = useRef<{ x: number; y: number } | null>(null)
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0]
+    start.current = { x: t.clientX, y: t.clientY }
+  }
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const s = start.current
+    start.current = null
+    if (!s) return
+    const t = e.changedTouches[0]
+    const dx = t.clientX - s.x
+    const dy = t.clientY - s.y
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return
+    if (dx > 0) onSwipeRight()
+    else onSwipeLeft()
+  }
+
+  return { onTouchStart, onTouchEnd }
+}
 
 function Selector({
   label,
@@ -108,15 +135,37 @@ function Dots({
 
 export default function HorariosPage() {
   const [dayIndex, setDayIndex] = useState(0)
+  const [dayDir, setDayDir] = useState<"next" | "prev">("next")
   const [dayOpen, setDayOpen] = useState(false)
   const [modalidadeOpen, setModalidadeOpen] = useState(false)
   const [modalidadeIndex, setModalidadeIndex] = useState(0)
+  const [modalidadeDir, setModalidadeDir] = useState<"next" | "prev">("next")
 
   const day = days[dayIndex]
   const modalidade = horariosPage.modalidades[modalidadeIndex]
 
+  const goDay = (target: number, dir: "next" | "prev") => {
+    setDayDir(dir)
+    setDayIndex(wrap(target, days.length))
+  }
+
+  const goModalidade = (target: number, dir: "next" | "prev") => {
+    setModalidadeDir(dir)
+    setModalidadeIndex(wrap(target, horariosPage.modalidades.length))
+  }
+
+  const daySwipe = useSwipe(
+    () => goDay(dayIndex - 1, "prev"),
+    () => goDay(dayIndex + 1, "next")
+  )
+
+  const modalidadeSwipe = useSwipe(
+    () => goModalidade(modalidadeIndex - 1, "prev"),
+    () => goModalidade(modalidadeIndex + 1, "next")
+  )
+
   return (
-    <SubpageShell title="HORÁRIOS">
+    <SubpageShell title="HORÁRIOS" footer={false}>
       <section className="bg-white">
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
           <div className="pt-[42px] lg:pt-14 pb-[38px] lg:pb-12">
@@ -133,7 +182,7 @@ export default function HorariosPage() {
                   <button
                     key={d.label}
                     onClick={() => {
-                      setDayIndex(i)
+                      goDay(i, i > dayIndex ? "next" : "prev")
                       setDayOpen(false)
                     }}
                     className={`block w-full text-left px-6 py-3 font-amiko text-sm hover:bg-gray-50 border-b border-gray-100 last:border-0 ${
@@ -149,45 +198,50 @@ export default function HorariosPage() {
         </div>
       </section>
 
-      <div className="bg-[#67c4a8]">
+      <div className="bg-[#67c4a8]" {...daySwipe}>
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
           <div className="py-[34px] lg:py-12">
-            <h2 className="font-changa text-white text-[22px] lg:text-[30px] font-bold text-center">
-              {day.label}
-            </h2>
-            <div className="mt-[24px] lg:mt-8 flex flex-col gap-[10px] lg:gap-3">
-              {day.schedule.length === 0 && (
-                <p className="font-amiko text-white text-[15px] text-center py-[13px]">
-                  Sem aulas neste dia.
-                </p>
-              )}
-              {day.schedule.map((s, i) => (
-                <div
-                  key={`${s.time}-${s.classes}-${i}`}
-                  className="flex items-stretch bg-white rounded-[16px]"
-                >
-                  <div className="flex items-center justify-center m-[6px] px-[14px] lg:px-[18px] rounded-[12px] bg-[#efefef] shrink-0">
-                    <span className="font-amiko text-[#363535] text-[15px] lg:text-[17px] whitespace-nowrap">
-                      {s.time}
-                    </span>
-                  </div>
-                  <div className="flex flex-col justify-center py-[10px] pr-[16px]">
-                    <span className="font-amiko text-[#363535] text-[15px] lg:text-[17px] leading-[20px] lg:leading-[22px]">
-                      {s.classes}
-                    </span>
-                    {s.studio && (
-                      <span className="font-amiko text-[#67c4a8] text-[12px] lg:text-[14px] mt-[2px]">
-                        {s.studio}
+            <div
+              key={dayIndex}
+              className={dayDir === "next" ? "hor-slide-in-right" : "hor-slide-in-left"}
+            >
+              <h2 className="font-changa text-white text-[22px] lg:text-[30px] font-bold text-center">
+                {day.label}
+              </h2>
+              <div className="mt-[24px] lg:mt-8 flex flex-col gap-[10px] lg:gap-3">
+                {day.schedule.length === 0 && (
+                  <p className="font-amiko text-white text-[15px] text-center py-[13px]">
+                    Sem aulas neste dia.
+                  </p>
+                )}
+                {day.schedule.map((s, i) => (
+                  <div
+                    key={`${s.time}-${s.classes}-${i}`}
+                    className="flex items-stretch bg-white rounded-[16px]"
+                  >
+                    <div className="flex items-center justify-center m-[6px] px-[14px] lg:px-[18px] rounded-[12px] bg-[#efefef] shrink-0">
+                      <span className="font-amiko text-[#363535] text-[15px] lg:text-[17px] whitespace-nowrap">
+                        {s.time}
                       </span>
-                    )}
+                    </div>
+                    <div className="flex flex-col justify-center py-[10px] pr-[16px]">
+                      <span className="font-amiko text-[#363535] text-[15px] lg:text-[17px] leading-[20px] lg:leading-[22px]">
+                        {s.classes}
+                      </span>
+                      {s.studio && (
+                        <span className="font-amiko text-[#67c4a8] text-[12px] lg:text-[14px] mt-[2px]">
+                          {s.studio}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
             <Dots
               count={days.length}
               active={dayIndex}
-              onSelect={setDayIndex}
+              onSelect={(i) => goDay(i, i > dayIndex ? "next" : "prev")}
               labelFor={(i) => days[i].label}
             />
           </div>
@@ -206,7 +260,7 @@ export default function HorariosPage() {
                 <button
                   key={m.title}
                   onClick={() => {
-                    setModalidadeIndex(i)
+                    goModalidade(i, i > modalidadeIndex ? "next" : "prev")
                     setModalidadeOpen(false)
                   }}
                   className={`block w-full text-left px-6 py-3 font-amiko text-sm hover:bg-gray-50 border-b border-gray-100 last:border-0 ${
@@ -221,44 +275,49 @@ export default function HorariosPage() {
         </div>
       </section>
 
-      <div className="bg-[#67c4a8]">
+      <div className="bg-[#67c4a8]" {...modalidadeSwipe}>
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
           <div className="py-[34px] lg:py-12">
-            <h2 className="font-changa text-white text-[22px] lg:text-[30px] font-bold text-center">
-              {modalidade.title}
-            </h2>
-            <div className="mt-[24px] lg:mt-8 flex flex-col gap-[10px] lg:gap-3">
-              {modalidade.classes.map((turma) => (
-                <div key={turma.name} className="flex items-stretch bg-white rounded-[16px]">
-                  <div className="flex items-center m-[6px] px-[14px] lg:px-[18px] rounded-[12px] bg-[#efefef] shrink-0 max-w-[48%]">
-                    <span className="font-amiko text-[#363535] text-[15px] lg:text-[17px] leading-[19px]">
-                      {turma.name}
-                    </span>
-                  </div>
-                  <div className="flex flex-col justify-center gap-[2px] py-[10px] pr-[16px]">
-                    {turma.schedules.map((s, i) => (
-                      <span
-                        key={`${s.days}-${s.time}-${i}`}
-                        className="font-amiko text-[#363535] text-[14px] lg:text-[16px] leading-[20px]"
-                      >
-                        {s.days ? `${s.days} · ` : ""}
-                        {s.time}
-                        {s.studio ? <span className="text-[#67c4a8]"> | {s.studio}</span> : null}
+            <div
+              key={modalidadeIndex}
+              className={modalidadeDir === "next" ? "hor-slide-in-right" : "hor-slide-in-left"}
+            >
+              <h2 className="font-changa text-white text-[22px] lg:text-[30px] font-bold text-center">
+                {modalidade.title}
+              </h2>
+              <div className="mt-[24px] lg:mt-8 flex flex-col gap-[10px] lg:gap-3">
+                {modalidade.classes.map((turma) => (
+                  <div key={turma.name} className="flex items-stretch bg-white rounded-[16px]">
+                    <div className="flex items-center m-[6px] px-[14px] lg:px-[18px] rounded-[12px] bg-[#efefef] shrink-0 max-w-[48%]">
+                      <span className="font-amiko text-[#363535] text-[15px] lg:text-[17px] leading-[19px]">
+                        {turma.name}
                       </span>
-                    ))}
+                    </div>
+                    <div className="flex flex-col justify-center gap-[2px] py-[10px] pr-[16px]">
+                      {turma.schedules.map((s, i) => (
+                        <span
+                          key={`${s.days}-${s.time}-${i}`}
+                          className="font-amiko text-[#363535] text-[14px] lg:text-[16px] leading-[20px]"
+                        >
+                          {s.days ? `${s.days} · ` : ""}
+                          {s.time}
+                          {s.studio ? <span className="text-[#67c4a8]"> | {s.studio}</span> : null}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              {modalidade.note && (
+                <p className="mt-[16px] font-amiko text-white text-[13px] lg:text-[15px] text-center">
+                  {modalidade.note}
+                </p>
+              )}
             </div>
-            {modalidade.note && (
-              <p className="mt-[16px] font-amiko text-white text-[13px] lg:text-[15px] text-center">
-                {modalidade.note}
-              </p>
-            )}
             <Dots
               count={horariosPage.modalidades.length}
               active={modalidadeIndex}
-              onSelect={setModalidadeIndex}
+              onSelect={(i) => goModalidade(i, i > modalidadeIndex ? "next" : "prev")}
               labelFor={(i) => horariosPage.modalidades[i].title}
             />
           </div>

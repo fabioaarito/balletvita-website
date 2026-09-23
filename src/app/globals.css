@@ -27,3 +27,33 @@ body {
 .font-playfair {
   font-family: var(--font-playfair), serif;
 }
+
+@keyframes hor-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes hor-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hor-slide-in-left {
+  animation: hor-slide-in-left 0.28s ease-out;
+}
+
+.hor-slide-in-right {
+  animation: hor-slide-in-right 0.28s ease-out;
+}

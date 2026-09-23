@@ -4,11 +4,13 @@ export function SubpageShell({
   title,
   variant = "teal",
   beforeTitle,
+  footer = true,
   children,
 }: {
   title: string
   variant?: "teal" | "yellow" | "custom"
   beforeTitle?: React.ReactNode
+  footer?: boolean
   children: React.ReactNode
 }) {
   const isYellow = variant === "yellow"
@@ -42,7 +44,7 @@ export function SubpageShell({
         </div>
       )}
       {children}
-      <Footer />
+      {footer && <Footer />}
     </main>
   )
 }

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function SobreNosPage() {
   return (
-    <SubpageShell title="SOBRE NÓS">
+    <SubpageShell title="SOBRE NÓS" footer={false}>
       <section className="bg-white">
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
           <div className="pt-[44px] lg:pt-14 pb-[60px] lg:pb-20">
@@ -19,7 +19,7 @@ export default function SobreNosPage() {
               {sobreNosConfig.intro.map((text) => (
                 <p
                   key={text}
-                  className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-center max-w-[430px] lg:max-w-3xl mx-auto"
+                  className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-left max-w-[430px] lg:max-w-3xl"
                 >
                   {text}
                 </p>
@@ -46,7 +46,7 @@ export default function SobreNosPage() {
                   {section.paragraphs.map((p) => (
                     <p
                       key={p}
-                      className="font-amiko text-white text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-center max-w-[430px] lg:max-w-3xl mx-auto"
+                      className="font-amiko text-white text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-left max-w-[430px] lg:max-w-3xl"
                     >
                       {p}
                     </p>
@@ -66,7 +66,7 @@ export default function SobreNosPage() {
                   {section.paragraphs.map((p) => (
                     <p
                       key={p}
-                      className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-center max-w-[430px] lg:max-w-3xl mx-auto"
+                      className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-left max-w-[430px] lg:max-w-3xl"
                     >
                       {p}
                     </p>
@@ -85,29 +85,35 @@ export default function SobreNosPage() {
 
       <section className="bg-white">
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-          <div className="pt-[46px] lg:pt-14 pb-[52px] lg:pb-16">
+          <div className="pt-[46px] lg:pt-14">
             <h3 className="font-changa text-[#67c4a8] text-[22px] lg:text-[30px] font-bold text-center">
               {sobreNosConfig.espaco.title}
             </h3>
-            <p className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-center max-w-[430px] lg:max-w-3xl mx-auto mt-[28px] lg:mt-8">
+            <p className="font-amiko text-[#363535] text-[16px] lg:text-[20px] leading-[24px] lg:leading-[30px] text-left max-w-[430px] lg:max-w-3xl mt-[28px] lg:mt-8">
               {sobreNosConfig.espaco.text}
             </p>
-            <div className="mt-[44px] lg:mt-14 flex flex-col gap-[44px] lg:gap-14">
-              {sobreNosConfig.espaco.studios.map((studio) => (
-                <div key={studio.title} className="w-full">
-                  <div className="w-full rounded-[14px] overflow-hidden">
-                    <img src={studio.image} alt={studio.title} className="w-full h-[240px] lg:h-[380px] object-cover" />
-                  </div>
-                  <p className="font-changa text-[#363535] text-[20px] lg:text-[26px] font-bold text-center mt-[20px] lg:mt-6">
-                    {studio.title}
-                  </p>
-                  <p className="font-amiko text-[#363535] text-[14px] lg:text-[16px] text-center mt-[4px]">
-                    {studio.address}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
+        </div>
+        <div className="mt-[44px] lg:mt-14 pb-[52px] lg:pb-16 flex flex-col gap-[44px] lg:gap-14">
+          {sobreNosConfig.espaco.studios.map((studio) => (
+            <div key={studio.title}>
+              <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
+                <p className="font-changa text-[#363535] text-[20px] lg:text-[26px] font-bold text-center">
+                  {studio.title}
+                </p>
+                <p className="font-amiko text-[#363535] text-[14px] lg:text-[16px] text-center mt-[4px]">
+                  {studio.address}
+                </p>
+              </div>
+              <div className="mt-[20px] lg:mt-6 grid grid-cols-2 lg:mx-auto lg:max-w-6xl lg:grid-cols-4 lg:gap-6 lg:px-8">
+                {studio.images.map((src, i) => (
+                  <div key={i} className="aspect-[4/3] overflow-hidden">
+                    <img src={src} alt={`${studio.title} ${i + 1}`} className="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </SubpageShell>

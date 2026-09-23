@@ -23,7 +23,7 @@ export const aboutConfig = {
   image: "/images/about-image.jpg",
   anniversary:
     "Em setembro de 2026, a Balletvita celebra 19 anos de atividade, um percurso construído com alunos, famílias, professores e todos aqueles que fizeram parte da história da escola. Mais do que formar bailarinos, procuramos contribuir para o crescimento pessoal de cada aluno e para a criação de uma relação duradoura com a dança.",
-  cta: "Conhecer a academia",
+  cta: "Saber mais sobre nós",
 } as const;
 
 export const sobreNosConfig = {
@@ -65,8 +65,30 @@ export const sobreNosConfig = {
     title: "O nosso Espaço",
     text: "A Academia Balletvita é composta por dois estúdios com cinco salas no total, todas elas preparadas para as necessidades de cada modalidade.",
     studios: [
-      { title: "Estúdio 1", address: "Rua Major Mouzinho de Albuquerque 12 loja A", image: "/images/about-image.jpg" },
-      { title: "Estúdio 2", address: "Rua Cândido de Oliveira 2 A", image: "/images/video-thumb.jpg" },
+      {
+        title: "Estúdio 1",
+        address: "Rua Major Mouzinho de Albuquerque 12 loja A",
+        images: [
+          "/images/about-image.jpg",
+          "/images/video-thumb.jpg",
+          "/images/banner1.jpg",
+          "/images/card2.jpg",
+          "/images/carousel-1.jpg",
+          "/images/carousel-2.jpg",
+        ],
+      },
+      {
+        title: "Estúdio 2",
+        address: "Rua Cândido de Oliveira 2 A",
+        images: [
+          "/images/video-thumb.jpg",
+          "/images/about-image.jpg",
+          "/images/carousel-1.jpg",
+          "/images/carousel-2.jpg",
+          "/images/banner1.jpg",
+          "/images/card2.jpg",
+        ],
+      },
     ],
   },
 } as const;
@@ -590,8 +612,8 @@ export const contactConfig = {
     { label: "balletvita@gmail.com", href: "mailto:balletvita@gmail.com" },
   ],
   socials: [
-    { src: "/images/social-1.png", alt: "Facebook", href: "https://facebook.com" },
-    { src: "/images/social-2.png", alt: "Instagram", href: "https://instagram.com" },
+    { src: "/images/social-2.png", alt: "Facebook", href: "https://www.facebook.com/balletvita" },
+    { src: "/images/social-1.png", alt: "Instagram", href: "https://www.instagram.com/balletvita_academia/" },
   ],
 } as const;
 
@@ -866,6 +888,20 @@ export const galeriaPage = {
     { title: "A Vendedora de Sonhos", image: "/images/carousel-2.jpg" },
     { title: "Quem conta um Conto", image: "/images/carousel-1.jpg" },
     { title: "Querido Diário", image: "/images/carousel-2.jpg" },
-    { title: "Fotografias", image: "/images/carousel-1.jpg" },
+  ],
+  fotografiasTitle: "Fotografias",
+  fotografias: [
+    "/images/carousel-1.jpg",
+    "/images/carousel-2.jpg",
+    "/images/banner1.jpg",
+    "/images/card2.jpg",
+    "/images/about-image.jpg",
+    "/images/video-thumb.jpg",
+    "/images/carousel-2.jpg",
+    "/images/carousel-1.jpg",
+    "/images/card2.jpg",
+    "/images/banner1.jpg",
+    "/images/video-thumb.jpg",
+    "/images/about-image.jpg",
   ],
 } as const;
