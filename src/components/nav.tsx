@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import Link from "next/link"
 import { heroConfig } from "@/data/site-config"
 
 const links = [
@@ -54,13 +55,13 @@ export function MenuOverlay() {
               {l.label}
             </a>
           ))}
-          <a
-            href="#cta"
+          <Link
+            href="/aula-experimental"
             onClick={() => setOpen(false)}
             className="mt-6 self-start inline-flex items-center px-6 py-3 rounded-full bg-[#f6e449] font-changa text-[#363535] font-bold"
           >
             {heroConfig.cta}
-          </a>
+          </Link>
         </nav>
       </div>
     </>

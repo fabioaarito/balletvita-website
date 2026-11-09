@@ -18,6 +18,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Aula Experimental form
+
+The "Aula Experimental" form is available at `/aula-experimental` and sends its submissions through the [Resend](https://resend.com) API.
+
+Create a `.env.local` file (see `.env.example`) with:
+
+```bash
+RESEND_API_KEY=re_...
+AULA_EXPERIMENTAL_TO_EMAIL="geral@balletvita.pt"
+AULA_EXPERIMENTAL_FROM_EMAIL="Balletvita <no-reply@balletvita.pt>"
+```
+
+`AULA_EXPERIMENTAL_FROM_EMAIL` must use a domain verified in Resend.
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More

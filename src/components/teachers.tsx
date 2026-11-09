@@ -68,11 +68,14 @@ export function TeachersSection() {
             <p className="font-amiko text-white text-[19px] lg:text-[26px] font-bold text-center leading-[25px] max-w-[324px] lg:max-w-2xl whitespace-pre-line">
               {teachersConfig.ctaBandTitle}
             </p>
-            <button className="mt-[44px] w-[266px] lg:w-[340px] h-[45px] lg:h-[54px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm">
+            <Link
+              href="/aula-experimental"
+              className="mt-[44px] w-[266px] lg:w-[340px] h-[45px] lg:h-[54px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm"
+            >
               <span className="font-changa text-[#363535] text-[17px] lg:text-[21px] font-bold">
                 {teachersConfig.cta}
               </span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

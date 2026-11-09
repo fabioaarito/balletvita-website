@@ -1,5 +1,6 @@
 'use client'
 
+import Link from "next/link"
 import { heroConfig } from "@/data/site-config"
 import { MenuOverlay } from "./nav"
 
@@ -39,11 +40,14 @@ export function Hero() {
         </div>
         <div className="bg-[#67c4a8]">
           <div className="flex flex-col items-center px-[34px] lg:px-8 pt-[52px] lg:pt-16 pb-[52px] lg:pb-16">
-            <button className="w-[266px] lg:w-[340px] h-[45px] lg:h-[54px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm">
+            <Link
+              href="/aula-experimental"
+              className="w-[266px] lg:w-[340px] h-[45px] lg:h-[54px] rounded-full bg-[#f6e449] flex items-center justify-center hover:bg-[#f2de3b] transition-colors shadow-sm"
+            >
               <span className="font-changa text-[#363535] text-[17px] lg:text-[21px] font-bold">
                 {heroConfig.cta}
               </span>
-            </button>
+            </Link>
             <p className="font-amiko text-white text-[18px] lg:text-[23px] font-bold text-center leading-[24px] mt-[25px] max-w-[320px]">
               {heroConfig.description}
             </p>

@@ -617,6 +617,37 @@ export const contactConfig = {
   ],
 } as const;
 
+export const aulaExperimentalConfig = {
+  title: "Aula Experimental",
+  intro:
+    "Vem experimentar a Balletvita! Preenche o formulário e entraremos em contacto contigo para encontrarmos a aula mais indicada.",
+  guardianNote: "*Apenas para menores de 18 anos",
+  modalityQuestion: "Que modalidade gostarias de experimentar?",
+  modalities: [
+    "Ballet",
+    "Dança Contemporânea",
+    "Hip-Hop",
+    "K-Pop",
+    "Danças de Salão",
+    "Outra/Ainda não sei",
+  ],
+  experienceQuestion: "Já tens experiência em dança?",
+  experienceOptions: [
+    "Não, será a primeira vez",
+    "Sim (até 1 ano)",
+    "Sim (mais de 1 ano)",
+  ],
+  preferenceNote: "*Indica a tua disponibilidade para nos ajudar a encontrar a turma certa.",
+  observationsNote: "Há alguma informação que consideres importante partilhar connosco? (opcional)",
+  consent:
+    "Li e aceito a Política de Privacidade e autorizo a Balletvita a utilizar estes dados para entrar em contacto comigo relativamente à aula experimental.",
+  submit: "Experimentar",
+  submitting: "A enviar...",
+  successTitle: "Pedido enviado!",
+  successMessage:
+    "Obrigado pelo teu interesse. Entraremos em contacto contigo brevemente para encontrarmos a aula experimental mais indicada.",
+} as const;
+
 export const associationConfig = {
   logo: "/images/assoc-logo.png",
   title: "A Pé esquerdo é...",
