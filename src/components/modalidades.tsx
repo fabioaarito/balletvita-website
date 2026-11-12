@@ -20,49 +20,33 @@ export function ModalidadesSection() {
           </h2>
           <div className="mt-[33px] lg:mt-8 flex flex-col items-center gap-[24px] lg:grid lg:grid-cols-3 lg:items-stretch lg:gap-6">
             {modalidadesConfig.items.map((item) => (
-              <Link
-                key={item.title}
-                href={`/modalidades/${item.slug}`}
-                className="relative w-full h-[174px] lg:h-[240px] rounded-[14px] overflow-hidden group"
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute inset-0 flex items-center justify-center font-changa text-white text-[17px] lg:text-[22px] font-bold tracking-[1.87px] text-center px-4">
-                  {item.title}
-                </span>
-              </Link>
+              <ModalityCard key={item.slug} slug={item.slug} title={item.title} image={item.image} />
             ))}
           </div>
-          <div className="mt-[24px] pb-[36px] lg:pb-12 flex justify-center">
-            <div className="relative w-full lg:w-[420px]">
-              <button
-                onClick={() => setOpen(!open)}
-                className="w-full flex items-center justify-between px-6 py-[4px] rounded-md border-[1px] border-[#f6e449] text-[#f6e449] hover:bg-[#f6e449]/10 transition-colors"
-              >
-                <span className="font-changa text-[15px] lg:text-[17px] font-semibold">
-                  {modalidadesConfig.dropdownLabel}
-                </span>
-                <svg className={`transition-transform ${open ? "rotate-180" : ""}`} width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M4 6L8 10L12 6" stroke="#f6e449" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {open && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-white/10 overflow-hidden z-20">
-                  {remainingModalities.map((m) => (
-                    <Link
-                      key={m.slug}
-                      href={`/modalidades/${m.slug}`}
-                      className="block px-6 py-3 font-amiko text-sm text-[#363535] hover:bg-gray-50 border-b border-gray-100 last:border-0"
-                    >
-                      {m.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
+          {open && (
+            <div
+              id="todas-modalidades"
+              className="mt-[24px] lg:mt-6 flex flex-col items-center gap-[24px] lg:grid lg:grid-cols-3 lg:items-stretch lg:gap-6"
+            >
+              {remainingModalities.map((item) => (
+                <ModalityCard key={item.slug} slug={item.slug} title={item.title} image={item.image} />
+              ))}
             </div>
+          )}
+          <div className="mt-[24px] pb-[36px] lg:pb-12 flex justify-center">
+            <button
+              onClick={() => setOpen(!open)}
+              aria-expanded={open}
+              aria-controls="todas-modalidades"
+              className="w-full lg:w-[420px] flex items-center justify-between px-6 py-[4px] rounded-md border-[1px] border-[#f6e449] text-[#f6e449] hover:bg-[#f6e449]/10 transition-colors"
+            >
+              <span className="font-changa text-[15px] lg:text-[17px] font-semibold">
+                {modalidadesConfig.dropdownLabel}
+              </span>
+              <svg className={`transition-transform ${open ? "rotate-180" : ""}`} width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 6L8 10L12 6" stroke="#f6e449" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -84,5 +68,23 @@ export function ModalidadesSection() {
         </div>
       </div>
     </section>
+  )
+}
+
+function ModalityCard({ slug, title, image }: { slug: string; title: string; image: string }) {
+  return (
+    <Link
+      href={`/modalidades/${slug}`}
+      className="relative w-full h-[174px] lg:h-[240px] rounded-[14px] overflow-hidden group"
+    >
+      <img
+        src={image}
+        alt={title}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+      <span className="absolute inset-0 flex items-center justify-center font-changa text-white text-[17px] lg:text-[22px] font-bold tracking-[1.87px] text-center px-4">
+        {title}
+      </span>
+    </Link>
   )
 }

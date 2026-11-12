@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { AulaExperimentalForm } from "@/components/aula-experimental-form"
-import { aulaExperimentalConfig, heroConfig } from "@/data/site-config"
+import { aulaExperimentalConfig } from "@/data/site-config"
 
 export const metadata: Metadata = {
   title: "Aula Experimental | Balletvita",
@@ -11,16 +11,11 @@ export const metadata: Metadata = {
 export default function AulaExperimentalPage() {
   return (
     <main className="min-h-screen bg-white">
-      <div className="h-[64px] lg:h-[80px] bg-white" />
-
       <div className="bg-[#67c4a8]">
         <div className="mx-auto w-full max-w-[560px] px-[30px] lg:px-8">
           <div className="pt-[24px] lg:pt-9">
-            <Link href="/" aria-label="Balletvita — Página inicial" className="inline-flex flex-col items-start">
+            <Link href="/" aria-label="Balletvita — Página inicial" className="inline-flex">
               <img src="/images/logo.png" alt="Balletvita" className="h-auto w-[147px] lg:w-[170px]" />
-              <span className="mt-[2px] font-changa text-[13px] font-semibold tracking-[1px] text-white">
-                {heroConfig.slogan}
-              </span>
             </Link>
           </div>
 

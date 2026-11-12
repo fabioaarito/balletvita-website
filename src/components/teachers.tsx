@@ -10,6 +10,8 @@ const featured = featuredSlugs
   .map((slug) => professoresData.find((p) => p.slug === slug))
   .filter((p): p is (typeof professoresData)[number] => Boolean(p))
 
+const remainingTeachers = professoresData.filter((p) => !featuredSlugs.includes(p.slug))
+
 export function TeachersSection() {
   const [open, setOpen] = useState(false)
 
@@ -20,52 +22,36 @@ export function TeachersSection() {
           <h2 className="font-changa text-[#67c4a8] text-[22px] lg:text-[34px] font-bold text-center leading-[26px] lg:leading-[40px]">
             {teachersConfig.title}
           </h2>
-          <div className="mt-[38px] lg:mt-10 flex lg:grid lg:grid-cols-4 lg:gap-4">
-            <div className="w-1/2 lg:w-auto flex flex-col">
-              {featured.filter((_, i) => i % 2 === 0).map((t) => (
+          <div id="todos-professores" className="mt-[38px] lg:mt-10 grid grid-cols-2 lg:grid-cols-4">
+            {featured.map((t) => (
+              <TeacherPhoto key={t.slug} professor={t} />
+            ))}
+            {open &&
+              remainingTeachers.map((t) => (
                 <TeacherPhoto key={t.slug} professor={t} />
               ))}
-            </div>
-            <div className="w-1/2 lg:w-auto flex flex-col">
-              {featured.filter((_, i) => i % 2 === 1).map((t) => (
-                <TeacherPhoto key={t.slug} professor={t} />
-              ))}
-            </div>
           </div>
           <div className="mt-[31px] pb-[56px] lg:pb-16 flex justify-center">
-            <div className="relative w-[348px] lg:w-[420px]">
-              <button
-                onClick={() => setOpen(!open)}
-                className="w-full flex items-center justify-between px-6 py-[4px] rounded-md border-[1px] border-[#67c4a8] text-[#67c4a8] hover:bg-[#67c4a8]/10 transition-colors"
-              >
-                <span className="font-changa text-[15px] lg:text-[17px] font-semibold">
-                  {teachersConfig.dropdownLabel}
-                </span>
-                <svg className={`transition-transform ${open ? "rotate-180" : ""}`} width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M4 6L8 10L12 6" stroke="#67c4a8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {open && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden z-20">
-                  {professoresData.map((p) => (
-                    <Link
-                      key={p.slug}
-                      href={`/professores/${p.slug}`}
-                      className="block px-6 py-3 font-amiko text-sm text-[#363535] hover:bg-gray-50 border-b border-gray-100 last:border-0"
-                    >
-                      {p.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+            <button
+              onClick={() => setOpen(!open)}
+              aria-expanded={open}
+              aria-controls="todos-professores"
+              className="w-[348px] lg:w-[420px] flex items-center justify-between px-6 py-[4px] rounded-md border-[1px] border-[#67c4a8] text-[#67c4a8] hover:bg-[#67c4a8]/10 transition-colors"
+            >
+              <span className="font-changa text-[15px] lg:text-[17px] font-semibold">
+                {teachersConfig.dropdownLabel}
+              </span>
+              <svg className={`transition-transform ${open ? "rotate-180" : ""}`} width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 6L8 10L12 6" stroke="#67c4a8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
       <div className="bg-[#67c4a8]">
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[34px] lg:px-8">
           <div className="pt-[46px] lg:pt-12 pb-[36px] lg:pb-14 flex flex-col items-center">
-            <p className="font-amiko text-white text-[19px] lg:text-[26px] font-bold text-center leading-[25px] max-w-[324px] lg:max-w-2xl whitespace-pre-line">
+            <p className="font-amiko text-white text-[16px] lg:text-[20px] font-bold text-center leading-[22px] lg:leading-[28px] max-w-[280px] lg:max-w-2xl whitespace-pre-line">
               {teachersConfig.ctaBandTitle}
             </p>
             <Link
@@ -85,25 +71,29 @@ export function TeachersSection() {
 
 function TeacherPhoto({ professor }: { professor: (typeof professoresData)[number] }) {
   return (
-    <div className="relative w-full h-[174px] overflow-hidden">
-      <img src={professor.image} alt={professor.name} className="w-full h-full object-cover" />
-      <div className="absolute inset-x-0 bottom-0 bg-[#67c4a8] px-3 py-[6px]">
-        <p className="font-changa text-white text-[15px] lg:text-[17px] font-bold leading-[18px]">
-          {professor.name}
-        </p>
-        <p className="font-changa text-white text-[11px] lg:text-[12px] font-semibold leading-[14px] opacity-90">
-          {professor.homeLabel}
-        </p>
-      </div>
-      <Link
-        href={`/professores/${professor.slug}`}
-        aria-label="Saber mais sobre o professor"
-        className="absolute top-[10px] right-[10px] w-7 h-7 flex items-center justify-center text-[#67c4a8] hover:text-[#4fa98d] transition-colors"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <Link
+      href={`/professores/${professor.slug}`}
+      aria-label={`Saber mais sobre ${professor.name}`}
+      className="group relative block w-full h-[174px] lg:h-[280px] overflow-hidden"
+    >
+      <img
+        src={professor.image}
+        alt={professor.name}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+      <span className="absolute top-[10px] right-[10px] w-7 h-7 flex items-center justify-center text-[#67c4a8] group-hover:text-[#4fa98d] transition-colors">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M12 4v16M4 12h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>
-      </Link>
-    </div>
+      </span>
+      <span className="absolute inset-x-0 bottom-0 block bg-[#67c4a8] px-3 py-[6px]">
+        <span className="block font-changa text-white text-[15px] lg:text-[17px] font-bold leading-[18px]">
+          {professor.name}
+        </span>
+        <span className="block font-changa text-white text-[11px] lg:text-[12px] font-semibold leading-[14px] opacity-90">
+          {professor.homeLabel}
+        </span>
+      </span>
+    </Link>
   )
 }

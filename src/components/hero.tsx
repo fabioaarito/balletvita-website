@@ -18,22 +18,17 @@ export function Hero() {
             loop
             playsInline
           />
-          <div className="absolute top-0 inset-x-0 flex items-center justify-between px-[34px] lg:px-10 pt-[12px]">
-            <div className="flex flex-col items-start">
-              <img src="/images/logo.png" alt="Balletvita" className="w-[147px] lg:w-[220px] h-auto" />
-              <span className="font-changa text-white text-[13px] lg:text-[17px] font-semibold mt-[2px] tracking-[1px]">
-                {heroConfig.slogan}
-              </span>
-            </div>
-            <div className="lg:hidden">
+          <div className="absolute top-0 inset-x-0 flex items-start justify-between px-[34px] lg:px-10 pt-[12px]">
+            <img src="/images/logo.png" alt="Balletvita" className="w-[147px] lg:w-[220px] h-auto" />
+            <div className="mt-[9px] lg:hidden">
               <MenuOverlay />
             </div>
           </div>
           <div className="absolute left-[34px] right-[34px] lg:left-16 lg:right-16 bottom-[46px] lg:bottom-[60px]">
-            <h1 className="font-changa-one text-[#f6e449] text-[22px] lg:text-[38px] leading-none">
+            <h1 className="font-changa-one text-[#f6e449] text-[20px] lg:text-[34px] leading-none">
               {heroConfig.title}
             </h1>
-            <p className="font-amiko font-bold text-white text-[17px] lg:text-[26px] leading-[23px] mt-[8px] whitespace-pre-line">
+            <p className="font-amiko font-bold text-white text-[16px] lg:text-[23px] leading-[22px] lg:leading-[28px] mt-[8px] whitespace-pre-line">
               {heroConfig.tagline}
             </p>
           </div>

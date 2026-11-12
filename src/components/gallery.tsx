@@ -20,14 +20,19 @@ export function GallerySection() {
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent" />
-          <span className="absolute bottom-4 left-[24px] font-changa text-white text-[14px] lg:text-[20px] font-semibold whitespace-pre-line">
+          <Link
+            href="/espetaculos"
+            aria-label="Ver espetáculos"
+            className="absolute inset-0 z-10"
+          />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+          <span className="absolute bottom-4 left-[24px] z-20 font-changa text-white text-[14px] lg:text-[20px] font-semibold whitespace-pre-line pointer-events-none">
             {galleryConfig.images[current].caption}
           </span>
           <button
             onClick={prev}
             aria-label="Anterior"
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 lg:w-11 lg:h-11 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors shadow"
+            className="absolute left-2 top-1/2 z-20 -translate-y-1/2 w-8 h-8 lg:w-11 lg:h-11 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors shadow"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M10 4L6 8L10 12" stroke="#363535" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -36,13 +41,13 @@ export function GallerySection() {
           <button
             onClick={next}
             aria-label="Seguinte"
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 lg:w-11 lg:h-11 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors shadow"
+            className="absolute right-2 top-1/2 z-20 -translate-y-1/2 w-8 h-8 lg:w-11 lg:h-11 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors shadow"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M6 4L10 8L6 12" stroke="#363535" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute bottom-3 left-1/2 z-20 -translate-x-1/2 flex gap-2">
             {galleryConfig.images.map((_, i) => (
               <button
                 key={i}

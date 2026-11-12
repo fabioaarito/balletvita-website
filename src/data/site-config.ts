@@ -10,7 +10,6 @@ export const colors = {
 
 export const heroConfig = {
   title: "BALLETVITA - ACADEMIA DE ARTES",
-  slogan: "VIDA, ARTE E MOVIMENTO",
   tagline: "Ensino de dança para todas as idades.\nA celebrar 19 anos em 2026!",
   cta: "Marcar Aula Experimental",
   description: "Explore o movimento e descubra o prazer da dança connosco.",
@@ -32,7 +31,7 @@ export const sobreNosConfig = {
     "A Balletvita - Academia de Artes nasceu da paixão pela dança e pelo ensino artístico.",
     "Ao longo de quase duas décadas de atividade, a academia tem acompanhado o percurso de várias gerações de alunos, proporcionando um espaço onde crianças, jovens e adultos podem explorar o movimento, desenvolver o seu potencial e descobrir o prazer de dançar.",
   ],
-  introImage: "/images/about-image.jpg",
+  introImage: "/images/banner1.jpg",
   sections: [
     {
       title: "Mais do que uma academia de dança",
@@ -47,6 +46,7 @@ export const sobreNosConfig = {
       title: "Uma Associação para promover a dança e dar oportunidades",
       band: "white" as const,
       image: "/images/banner1.jpg",
+      imageAfterParagraph: 0,
       paragraphs: [
         "Em 2025 a Balletvita fundou a Pé Esquerdo - Associação Cultural com o objetivo de promover novos projetos artísticos, iniciativas culturais e atividades ligadas à dança. Representa neste momento uma estrutura com atividade contínua e estruturada na área da dança desportiva e da criação coreográfica, oferecendo oportunidades formativas e culturais de excelência a crianças, jovens e adultos.",
         "O primeiro projeto a ser iniciado foi a Companhia de Dança Balletvita, estrutura de criação contínua que estreou o seu primeiro projeto a 17 de junho desse ano, no Centro Cultural da Malaposta.",
@@ -293,7 +293,7 @@ export const teachersConfig = {
   leftImage: "/images/teacher-f.jpg",
   rightImage: "/images/teacher-m.jpg",
   ctaBandTitle:
-    "Seja para seguir o sonho da dança ou por pura diversão, a Balletvita é o sitio ideal para toda a família.\nJunte-se a nós!",
+    "Seja para seguir o sonho da dança ou por pura diversão, a Balletvita é o sítio ideal para toda a família.\nJunte-se a nós!",
   cta: "Marcar Aula Experimental",
 } as const;
 
@@ -659,6 +659,17 @@ export const associationConfig = {
 } as const;
 
 export const associacaoPage = {
+  heroImage: "/images/banner1.jpg",
+  destaque: {
+    image: "/images/carousel-1.jpg",
+    caption: "Espetáculo “Ecos”\nAdultos",
+  },
+  contactosGaleria: [
+    "/images/banner1.jpg",
+    "/images/card2.jpg",
+    "/images/banner1.jpg",
+    "/images/card2.jpg",
+  ],
   intro: {
     title: "Apresentação Geral",
     paragraphs: [
@@ -915,10 +926,17 @@ export const galeriaPage = {
   title: "EM PALCO",
   heading: "Últimos espetáculos",
   items: [
-    { title: "Ser e nada mais...", image: "/images/carousel-1.jpg" },
-    { title: "A Vendedora de Sonhos", image: "/images/carousel-2.jpg" },
-    { title: "Quem conta um Conto", image: "/images/carousel-1.jpg" },
-    { title: "Querido Diário", image: "/images/carousel-2.jpg" },
+    { title: "Ecos", image: "/images/ecos-poster.jpg", video: "/videos/espetaculos/ecos.mp4" },
+    {
+      title: "A Vendedora de Sonhos",
+      image: "/images/em-palco-poster.jpg",
+      video: "/videos/espetaculos/em-palco.mp4",
+    },
+    {
+      title: "Próximo Destino",
+      image: "/images/proximo-poster.jpg",
+      video: "/videos/espetaculos/proximo-destino.mp4",
+    },
   ],
   fotografiasTitle: "Fotografias",
   fotografias: [

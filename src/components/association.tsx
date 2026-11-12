@@ -36,10 +36,15 @@ export function AssociationSection() {
               alt=""
               className="w-full h-full object-cover"
             />
+            <Link
+              href="/associacao"
+              aria-label="Conhecer a Associação Pé Esquerdo"
+              className="absolute inset-0 z-10"
+            />
             <button
               onClick={prev}
               aria-label="Anterior"
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 lg:w-11 lg:h-11 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors shadow"
+              className="absolute left-2 top-1/2 z-20 -translate-y-1/2 w-8 h-8 lg:w-11 lg:h-11 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors shadow"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M10 4L6 8L10 12" stroke="#363535" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -48,13 +53,13 @@ export function AssociationSection() {
             <button
               onClick={next}
               aria-label="Seguinte"
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 lg:w-11 lg:h-11 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors shadow"
+              className="absolute right-2 top-1/2 z-20 -translate-y-1/2 w-8 h-8 lg:w-11 lg:h-11 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors shadow"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M6 4L10 8L6 12" stroke="#363535" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+            <div className="absolute bottom-3 left-1/2 z-20 -translate-x-1/2 flex gap-2">
               {images.map((_, i) => (
                 <button
                   key={i}

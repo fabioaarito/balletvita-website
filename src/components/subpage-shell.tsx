@@ -1,15 +1,18 @@
+import Link from "next/link"
 import { Footer } from "./footer"
 
 export function SubpageShell({
   title,
   variant = "teal",
   beforeTitle,
+  logo = false,
   footer = true,
   children,
 }: {
   title: string
   variant?: "teal" | "yellow" | "custom"
   beforeTitle?: React.ReactNode
+  logo?: boolean
   footer?: boolean
   children: React.ReactNode
 }) {
@@ -17,11 +20,23 @@ export function SubpageShell({
   const isCustom = variant === "custom"
   return (
     <main className="min-h-screen bg-white">
-      <div className="h-[64px] lg:h-[80px] bg-white" />
       {beforeTitle}
       {!isCustom && (
         <div className={isYellow ? "bg-[#f6e449]" : "bg-[#67c4a8]"}>
           <div className="relative mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
+            {!isYellow && logo && (
+              <Link
+                href="/"
+                aria-label="Balletvita — Página inicial"
+                className="absolute left-[30px] lg:left-8 top-[18px] lg:top-6 z-10 inline-flex"
+              >
+                <img
+                  src="/images/logo.png"
+                  alt="Balletvita — Academia de Artes"
+                  className="w-[108px] lg:w-[155px] h-auto"
+                />
+              </Link>
+            )}
             <div
               className={
                 isYellow
