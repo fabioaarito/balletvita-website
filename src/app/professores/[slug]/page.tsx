@@ -50,6 +50,17 @@ export default async function ProfessorPage({
             <img src={professor.image} alt={professor.name} className="w-full h-full object-cover" />
           </div>
           <div className="w-[30%] h-full bg-[#67c4a8]" />
+          <Link
+            href="/"
+            aria-label="Balletvita — Página inicial"
+            className="absolute left-[34px] lg:left-10 top-[18px] lg:top-6 z-10 inline-flex"
+          >
+            <img
+              src="/images/logo.png"
+              alt="Balletvita — Academia de Artes"
+              className="w-[108px] lg:w-[155px] h-auto"
+            />
+          </Link>
           <div className="absolute bottom-0 left-[44%] right-0 min-h-[60px] lg:min-h-[84px] bg-[#f6e449] flex items-center justify-center px-[12px] py-[14px]">
             <span className="font-changa text-[#363535] text-[17px] lg:text-[26px] font-bold tracking-[1px] text-center leading-[22px] lg:leading-[32px]">
               {professor.name.toUpperCase()}

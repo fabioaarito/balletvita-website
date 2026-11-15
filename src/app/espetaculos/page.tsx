@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 
 export default function EspetaculosPage() {
   return (
-    <SubpageShell title={galeriaPage.title} footer={false}>
+    <SubpageShell title={galeriaPage.title} logo footer={false}>
       <section className="bg-white">
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-          <div className="pt-[42px] lg:pt-14 pb-[52px] lg:pb-16">
-            <h2 className="font-changa text-[#363535] text-[24px] lg:text-[32px] font-semibold text-left">
+          <div className="pt-[38px] lg:pt-14 pb-[52px] lg:pb-16">
+            <h2 className="font-changa text-[#67c4a8] text-[20px] lg:text-[28px] font-semibold text-center">
               {galeriaPage.heading}
             </h2>
             <div className="mt-[38px] lg:mt-12">
@@ -25,7 +25,7 @@ export default function EspetaculosPage() {
 
       <section className="bg-white">
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
-          <h2 className="font-changa text-[#363535] text-[24px] lg:text-[32px] font-semibold text-left">
+          <h2 className="font-changa text-[#67c4a8] text-[20px] lg:text-[28px] font-semibold text-center">
             {galeriaPage.fotografiasTitle}
           </h2>
         </div>

@@ -165,7 +165,7 @@ export default function HorariosPage() {
   )
 
   return (
-    <SubpageShell title="HORÁRIOS" footer={false}>
+    <SubpageShell title="HORÁRIOS" logo footer={false}>
       <section className="bg-white">
         <div className="mx-auto max-w-[402px] lg:max-w-7xl px-[30px] lg:px-8">
           <div className="pt-[42px] lg:pt-14 pb-[38px] lg:pb-12">
