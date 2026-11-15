@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import { SubpageShell } from "@/components/subpage-shell"
 import { ModalidadeProfessores } from "@/components/modalidade-professores"
@@ -37,12 +38,23 @@ export default async function ModalidadePage({
       variant="yellow"
       footer={false}
       beforeTitle={
-        <div className="w-full">
+        <div className="relative w-full">
           <img
             src={modalidade.image}
             alt={modalidade.title}
             className="w-full h-[240px] lg:h-[360px] object-cover"
           />
+          <Link
+            href="/"
+            aria-label="Balletvita — Página inicial"
+            className="absolute left-[34px] lg:left-10 top-[18px] lg:top-6 z-10 inline-flex"
+          >
+            <img
+              src="/images/logo.png"
+              alt="Balletvita — Academia de Artes"
+              className="w-[108px] lg:w-[155px] h-auto"
+            />
+          </Link>
         </div>
       }
     >
